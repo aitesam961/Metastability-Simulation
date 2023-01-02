@@ -1,4 +1,0 @@
-Circuit: * C:\Users\aites\Documents\LTspiceXVII\Draft1.asc
-
-Fatal Error: PWL time,value pairs out of chronological order in source V4
-    2e-009 is not before 1e-009
