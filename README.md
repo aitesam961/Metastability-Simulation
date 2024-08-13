@@ -41,11 +41,12 @@ Want to see a real world experimentation with metastability on physical hardware
 ├── bsim461.nmos
 ├── bsim461.pmos
 ├── cmosedu_models.txt
-├── LTspice-sim
+├── LTspice-sources
+│   ├── MetaS_ltspice_sim_2.asc
 │   └── Metastability_d_Latch_success.asc
-├── Metastability_successful.rar
 ├── README.md
 ├── sch.png
 └── Screenshot 2023-01-02 212710.png
+
 
 ```
