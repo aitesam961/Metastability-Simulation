@@ -50,3 +50,10 @@ Want to see a real world experimentation with metastability on physical hardware
 
 
 ```
+
+### License
+
+This Project is published under General Public License V3.0 See `LICENSE.txt` for more information.
+> https://www.gnu.org/licenses/quick-guide-gplv3.html
+
+
