@@ -1,59 +1,42 @@
-# Metastability-Simulation
- Simulating the Metastability in Flip Flops for Visualization purposes
+# Metastability Simulation
 
-Metastability is a critical problem in Digital Systems which is often considered as *solved* since most modern synthesis tools takle care of it but it still needs attention. Infact the Developers have reduced it's chances to a very small probabilistic value such that it can be easily avoided by following the best design practices. 
-<br>
-For visualization and academnic purposes, I created this simulation under the supervision of my professor. It shows how Metastability occurs and what are it's after-effects.
+An LTspice experiment for visualizing metastability in a transistor-level storage circuit. Created for academic study under a professor's supervision, the project explores what happens when the data input changes near a clock transition.
 
-## Simulation Environment
+## What the experiment shows
 
-LTSpice is used to create this simulation as it happens to be a sensible choice where we can vary the MOSFET properties and Simulation Variables to a great Extent.
+The supplied waveform illustrates a period in which the circuit's outputs remain at intermediate levels before resolving. Use it to study the interaction between input timing, clock edges, and the transistor models.
 
-## Schematic 
-<p align="center">
-  <img src="https://github.com/aitesam961/Metastability-Simulation/blob/main/sch.png" width="950" title="Opening Image">
-</p>
+![Transistor-level simulation schematic](sch.png)
 
-<br> 
-In the simulation below, It can be seen that the input D of the flip flop changes right on the time when clock is transitioning from LOW to HIGH state.
-Resultantly, such a waveform appears where both the outputs of Flip Flops are held to an undefined state for certain amount of time which RESETS to Either side once the clock pulls to LOW.
-<br> In simulation environments, It's hard to reproduce such an even due to very high precision of calculation given the fact that most of the Environmental variables are running in Ideal States.
+![Recorded simulation waveform](Screenshot%202023-01-02%20212710.png)
 
-## Simulation
-<p align="center">
-  <img src="https://github.com/aitesam961/Metastability-Simulation/blob/main/Screenshot%202023-01-02%20212710.png" width="950" title="Opening Image">
-</p>
+## Files
 
-<br> The downside of this work is that the states always set to the same side upon every iteration which should'nt happen for a true metastability event but this has to do with the way software simulators work.
-If someone in the community comes up with a fix for this, Feel free to FORK the Repo and Merge your Solution.
+| File | Purpose |
+| --- | --- |
+| [Metastability_d_Latch_success.asc](LTspice-sources/Metastability_d_Latch_success.asc) | Main schematic, including a transient analysis command and CMOS model include |
+| [MetaS_ltspice_sim_2.asc](LTspice-sources/MetaS_ltspice_sim_2.asc) | Additional experimental schematic |
+| [cmosedu_models.txt](cmosedu_models.txt) | CMOS models referenced by the main schematic |
+| [bsim461.nmos](bsim461.nmos), [bsim461.pmos](bsim461.pmos) | Additional supplied transistor model files |
 
+## Run the main experiment
 
+1. Open `LTspice-sources/Metastability_d_Latch_success.asc` in LTspice.
+2. Make the model file available to the schematic. Its existing directive is `.include cmosedu_models.txt`, but the file is stored one directory above the schematic. Either copy `cmosedu_models.txt` beside the schematic in your working copy or change the directive to `.include ../cmosedu_models.txt`.
+3. Run the existing `.tran 0 10n 0 0.5p` analysis: a 10 ns simulation with a 0.5 ps maximum timestep.
+4. Probe the data input, clock, and storage-node outputs. Compare their transitions with the recorded waveform above.
+5. To explore timing sensitivity, adjust the input pulse timing in small increments and record the model and simulation settings with each result.
 
-## Colin O'flynn's Physical Recreation of metastability on FPGA
+## Interpretation and limitations
 
-Want to see a real world experimentation with metastability on physical hardware? See Colin's work on producing metastability on an FPGA. [VIDEO](https://www.youtube.com/watch?v=alRaqQzTPds)
+The original experiment repeatedly resolved to the same state. This is a limitation of the demonstration: the recorded simulation does not establish a statistical distribution of resolution outcomes or measure hardware failure rates. Results also depend on the stimulus, device models, and numerical settings.
 
+Contributions that investigate this behavior are welcome. Include reproducible schematics, model paths, simulator settings, and waveform comparisons with a proposed change.
 
-### Directory Tree
+## Related demonstration
 
-```
-.
-├── bsim461.nmos
-├── bsim461.pmos
-├── cmosedu_models.txt
-├── LTspice-sources
-│   ├── MetaS_ltspice_sim_2.asc
-│   └── Metastability_d_Latch_success.asc
-├── README.md
-├── sch.png
-└── Screenshot 2023-01-02 212710.png
+The original project also points to [Colin O'Flynn's FPGA metastability demonstration](https://www.youtube.com/watch?v=alRaqQzTPds) for a hardware-based companion to this simulation.
 
+## License
 
-```
-
-### License
-
-This Project is published under General Public License V3.0 See `LICENSE.txt` for more information.
-> https://www.gnu.org/licenses/quick-guide-gplv3.html
-
-
+GNU General Public License v3.0. See [LICENSE](LICENSE) for the license text.
